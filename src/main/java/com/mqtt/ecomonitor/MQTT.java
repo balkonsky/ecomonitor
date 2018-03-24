@@ -1,5 +1,7 @@
 package com.mqtt.ecomonitor;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -15,32 +17,33 @@ public class MQTT {
     private static String clientID = "JavaSample";
     private static String content = null;
     MemoryPersistence persistence = new MemoryPersistence();
+    private static final Logger log = LogManager.getLogger(MQTT.class);
 
     public void sendMessage (double payload){
         try {
             MqttClient client = new MqttClient(broker,clientID,persistence);
             MqttConnectOptions conOptions = new MqttConnectOptions();
             conOptions.setCleanSession(true);
-            System.out.println((new Date(System.currentTimeMillis())) + " | " + "Connecting to broker: " + broker);
+            log.debug("Connecting to broker: " + broker);
             client.connect(conOptions);
-            System.out.println((new Date(System.currentTimeMillis())) + " | " + "Connected");
-            System.out.println((new Date(System.currentTimeMillis())) + " | " + "Publishing message " + (content=String.valueOf(payload)));
+            log.debug("Connected");
+            log.debug("Publishing message " + (content=String.valueOf(payload)));
             MqttMessage message = new MqttMessage(content.getBytes());
             message.setQos(qos);
             client.publish(topic,message);
-            System.out.println((new Date(System.currentTimeMillis())) + " | " + "Message published");
+            log.debug("Message published");
             client.disconnect();
-            System.out.println((new Date(System.currentTimeMillis())) + " | " + "Disconected");
+            log.debug("Disconected");
             //System.exit(0);
         }
 
         catch (MqttException e){
-            System.out.println("reason " + e.getReasonCode());
-            System.out.println("msg " + e.getMessage());
-            System.out.println("loc " + e.getLocalizedMessage());
-            System.out.println("cause " + e.getCause());
-            System.out.println("excep " + e);
-            e.printStackTrace();
+            log.error("reason " + e.getReasonCode());
+            log.error("msg " + e.getMessage());
+            log.error("loc " + e.getLocalizedMessage());
+            log.error("cause " + e.getCause());
+            log.error("excep " + e);
+            log.error(e);
         }
 
     }
