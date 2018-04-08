@@ -26,7 +26,7 @@ public class RequestAPI {
                     .setConnectionRequestTimeout(5000)
                     .setSocketTimeout(5000).build();
             CloseableHttpClient client = HttpClientBuilder.create().setDefaultRequestConfig(config).build();
-            CloseableHttpResponse response = client.execute(new HttpGet("https://api.darksky.net/forecast/4d756d88a5410c440849626517936408/59.902655,30.4847007?units=auto"));
+            CloseableHttpResponse response = client.execute(new HttpGet(" "));
             HttpEntity entity = response.getEntity();
             log.debug("Запрос к погодному API ");
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
