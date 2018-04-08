@@ -11,9 +11,9 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import java.util.Date;
 
 public class MQTT {
-    private static String topic = "VoSens/12_line/pressure";
+    private static String topic = "";
     private static int qos = 1;
-    private static String broker = "tcp://91.238.230.148:1883";
+    private static String broker = "tcp://";
     private static String clientID = "JavaSample";
     private static String content = null;
     MemoryPersistence persistence = new MemoryPersistence();
