@@ -24,17 +24,16 @@ public class MQTT {
             MqttClient client = new MqttClient(broker,clientID,persistence);
             MqttConnectOptions conOptions = new MqttConnectOptions();
             conOptions.setCleanSession(true);
-            log.debug("Connecting to broker: " + broker);
+            log.debug("Соедеямся с брокером: " + broker);
             client.connect(conOptions);
-            log.debug("Connected");
-            log.debug("Publishing message " + (content=String.valueOf(payload)));
+            log.debug("Соединились");
+            log.debug("Публикуем сообщение " + (content=String.valueOf(payload)));
             MqttMessage message = new MqttMessage(content.getBytes());
             message.setQos(qos);
             client.publish(topic,message);
-            log.debug("Message published");
+            log.debug("Сообщение опубликовали");
             client.disconnect();
-            log.debug("Disconected");
-            //System.exit(0);
+            log.debug("Разъединились");
         }
 
         catch (MqttException e){
