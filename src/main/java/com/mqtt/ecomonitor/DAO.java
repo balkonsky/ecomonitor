@@ -6,9 +6,9 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 
 public class DAO {
-    private static final String dburl = "jdbc:mysql://localhost:3306/MagistrBase";
-    private static final String user = "root";
-    private static final String password = "Ael8Raix";
+    private static final String dburl = "";
+    private static final String user = "";
+    private static final String password = "";
     private static final Logger log = LogManager.getLogger(DAO.class);
 
     private static Connection con;
